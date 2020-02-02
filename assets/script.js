@@ -79,3 +79,29 @@ $("#searchBtn").on("click", function() {
         $("#currentCity").append(card)
        
       }
+      function getCurrentForecast () {
+  
+        $.ajax({
+          url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + apiKey,
+          method: "GET"
+        }).then(function (response){
+      
+          console.log(response)
+          console.log(response.dt)
+          $('#forecast').empty();
+      
+          // variable to hold response.list
+          let results = response.list;
+          console.log(results)
+          
+          //declare start date to check against
+          // startDate = 20
+          //have end date, endDate = startDate + 5
+      
+          for (let i = 0; i < results.length; i++) {
+      
+            let day = Number(results[i].dt_txt.split('-')[2].split(' ')[0]);
+            let hour = results[i].dt_txt.split('-')[2].split(' ')[1];
+            console.log(day);
+            console.log(hour);
+      
